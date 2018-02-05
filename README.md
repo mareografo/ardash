@@ -13,7 +13,7 @@ A server that allows arduino to send it's data. Hosted on [Heroku](https://herok
 ### 2.1. Usage:
 ###### Reference:
 ```
-  http://ardash.herokuapp.com/api/sensor?{parameter_name}={parameter_value}
+  http://mardash.herokuapp.com/api/sensor?{parameter_name}={parameter_value}
 ```
 
 ###### Parameters:
