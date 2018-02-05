@@ -347,7 +347,7 @@ var vTemp = document.getElementById('verTemp');
    promisehum_.catch(function(s){
       document.getElementById('spinnerloading2').setAttribute("hidden", "");
       document.getElementById('loading2title').innerHTML="<strong>Oops,<strong>";
-      document.getElementById('loading2sub').innerHTML="<i>Não foi econtrado nenhum dado registado no dia " + dpTemp.value +".<i>";
+      document.getElementById('loading2sub').innerHTML="<i>Não foi econtrado nenhum dado registado no dia " + dpHum.value +".<i>";
     });
  });
 
@@ -460,7 +460,7 @@ var vTemp = document.getElementById('verTemp');
    promisedist_.catch(function(s){
       document.getElementById('spinnerloading3').setAttribute("hidden", "");
       document.getElementById('loading3title').innerHTML="<strong>Oops,<strong>";
-      document.getElementById('loading3sub').innerHTML="<i>Não foi econtrado nenhum dado registado no dia " + dpTemp.value +".<i>";
+      document.getElementById('loading3sub').innerHTML="<i>Não foi econtrado nenhum dado registado no dia " + dpDist.value +".<i>";
    });
  });
 
