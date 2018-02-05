@@ -5,7 +5,7 @@
 
 ## 1. Dashboard
 A dashboard which shows all the activity from arduino sensors updated in real time.
-[Open dashboard](https://kishannareshpal.github.io/ardash).
+[Open dashboard](https://mareografo.github.io/dashboard).
 
 ## 2. Server
 A server that allows arduino to send it's data. Hosted on [Heroku](https://heroku.com).

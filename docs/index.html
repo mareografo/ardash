@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Mareografo Dashboard</title>
+    <title>Mareógrafo Dashboard</title>
 
     <!-- md-bootstrap -->
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"> -->
@@ -12,8 +12,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-red.min.css">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="material-components-web/dist/material-components-web.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"/>
+    <link rel="stylesheet" href="js-css/material-components-web/dist/material-components-web.css">
     <link rel="stylesheet" href="js-css/app.css">
 
   </head>
@@ -24,7 +23,7 @@
 
     <!-- SHOW A COOL LOADING SCREEN WHILE THE CONTENT FINISHES TO LOAD -->
     <div id="loading_" style="text-aling: center;" class="middler">
-      <h4 style="color: white"><i><strong>Arduino Dashboard</strong></i></h4>
+      <h6 style="color: white"><i><span><i class="material-icons">timeline</i></span><strong>Mareógrafo Dashboard</strong></i></h6>
       <div style="width: 100%" id="p2" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
     </div>
 
@@ -33,7 +32,8 @@
       <header class="mdl-layout__header">
         <div class="mdl-layout__header-row">
           <!-- Title -->
-          <span class="mdl-layout-title"><strong>ArDash</strong></span>
+          <i class="material-icons">timeline</i>
+          <span class="mdl-layout-title"><strong> MarDash<span style="font-size: 10px; color: white;">v1.1</span></strong></span>
         </div>
         <!-- Tabs -->
         <div class="mdl-layout__tab-bar ">
@@ -100,7 +100,7 @@
                   <p style="color: grey">Data:
                     <span>
                       <span class="mdl-textfield mdl-js-textfield" style="width: 90px; margin-bottom: 0px">
-                        <input class="mdl-textfield__input" type="text" id="datepickerTemp">
+                        <input readonly class="mdl-textfield__input" type="text" id="datepickerTemp">
                       </span>
                       <span>
                         <button disabled style="background-color: #d7d4d4; border-radius: 5px;" id="verTemp" class="mdl-button mdl-js-button mdl-js-ripple-effect">
@@ -135,7 +135,7 @@
                   <p style="color: grey">Data:
                     <span>
                       <span class="mdl-textfield mdl-js-textfield" style="width: 90px; margin-bottom: 0px">
-                        <input class="mdl-textfield__input" type="text" id="datepickerHum">
+                        <input readonly class="mdl-textfield__input" type="text" id="datepickerHum">
                       </span>
                       <span>
                         <button disabled style="background-color: #d7d4d4; border-radius: 5px;" id="verHum" class="mdl-button mdl-js-button mdl-js-ripple-effect">
@@ -169,7 +169,7 @@
                   <p style="color: grey">Data:
                     <span>
                       <span class="mdl-textfield mdl-js-textfield" style="width: 90px; margin-bottom: 0px">
-                        <input class="mdl-textfield__input" type="text" id="datepickerDist">
+                        <input readonly class="mdl-textfield__input" type="text" id="datepickerDist">
                       </span>
                       <span>
                         <button disabled style="background-color: #d7d4d4; border-radius: 5px;" id="verDist" class="mdl-button mdl-js-button mdl-js-ripple-effect">
@@ -208,14 +208,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.4/js.cookie.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="material-components-web/dist/material-components-web.min.js"></script>
+    <script src="js-css/material-components-web/dist/material-components-web.min.js"></script>
     <script>mdc.autoInit()</script>
     <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"></script>
     <script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.2/jspdf.plugin.autotable.js"></script>
     <script src="js-css/moment.min.js" charset="utf-8"></script>
     <script src="js-css/app.js" charset="utf-8"></script>
-    <script src="js-css/map.js" charset="utf-8"></script>
 
   </body>
 </html>

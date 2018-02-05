@@ -7,7 +7,7 @@ document.onreadystatechange = function () {
 
       },1000);
   }
-};1
+};
 
 // Initialize Firebase
 var config = {
@@ -118,7 +118,7 @@ var vTemp = document.getElementById('verTemp');
  $(function(){
    $("#datepickerTemp").datepicker({
      minDate: new Date(2018, 01, 01),
-     maxDate: new Date(2018, 01, 28),
+     maxDate: new Date(2018, 01, 29),
      dateFormat: "dd M yy",
      showAnim: "slideDown",
      onSelect: function (date){
@@ -129,7 +129,7 @@ var vTemp = document.getElementById('verTemp');
 
    $("#datepickerHum").datepicker({
      minDate: new Date(2018, 01, 01),
-     maxDate: new Date(2018, 01, 28),
+     maxDate: new Date(2018, 01, 29),
      dateFormat: "dd M yy",
      showAnim: "slideDown",
      onSelect: function (date){
@@ -140,7 +140,7 @@ var vTemp = document.getElementById('verTemp');
 
    $("#datepickerDist").datepicker({
      minDate: new Date(2018, 01, 01),
-     maxDate: new Date(2018, 01, 28),
+     maxDate: new Date(2018, 01, 29),
      dateFormat: "dd M yy",
      showAnim: "slideDown",
      onSelect: function (date){
@@ -177,7 +177,7 @@ var vTemp = document.getElementById('verTemp');
    document.getElementById('loading1title').innerHTML="<strong>Procurando dados...<strong>";
    document.getElementById('loading1sub').innerHTML="<i>conectando com o servidor<i>";
 
-   ref.once("value").then(function(snapshot) {
+   var promisetemp_ = ref.once("value").then(function(snapshot) {
       snapshot.forEach(function(childSnapshot) {
         var childData = childSnapshot.val();
 
@@ -204,9 +204,9 @@ var vTemp = document.getElementById('verTemp');
           temp_time = [];
           temp_values = [];
 
-          // if(chartTemp != null){
-          //   chartTemp.destroy();
-          // }
+          if(chartTemp != null){
+            chartTemp.destroy();
+          }
 
           for(var h in temp_array){
             temp_time.push(temp_array[h][0]); // use 0 to get time, use 1 to get value
@@ -248,6 +248,13 @@ var vTemp = document.getElementById('verTemp');
         }
       });
     });
+
+   promisetemp_.catch(function(s){
+     document.getElementById('spinnerloading1').setAttribute("hidden", "");
+     document.getElementById('loading1title').innerHTML="<strong>Oops,<strong>";
+     document.getElementById('loading1sub').innerHTML="<i>Não foi econtrado nenhum dado registado no dia " + dpTemp.value +".<i>";
+   });
+
  });
 
  $("#verHum").click(function() {
@@ -256,13 +263,14 @@ var vTemp = document.getElementById('verTemp');
    yearX = dpHum.value.split(" ")[2];
 
    loading2.classList.remove("hidden");
-   document.getElementById('getpdf_hum').setAttribute("disabled", "");
    ctx_hum.classList.add("hidden");
+
+   document.getElementById('getpdf_hum').setAttribute("disabled", "");
    document.getElementById('spinnerloading2').removeAttribute("hidden", "");
    document.getElementById('loading2title').innerHTML="<strong>Procurando dados...<strong>";
    document.getElementById('loading2sub').innerHTML="<i>conectando com o servidor<i>";
 
-   ref.once("value").then(function(snapshot) {
+   var promisehum_ = ref.once("value").then(function(snapshot) {
       snapshot.forEach(function(childSnapshot) {
         var childData = childSnapshot.val();
 
@@ -333,51 +341,69 @@ var vTemp = document.getElementById('verTemp');
         }
       });
     });
+
+   promisehum_.catch(function(s){
+      document.getElementById('spinnerloading2').setAttribute("hidden", "");
+      document.getElementById('loading2title').innerHTML="<strong>Oops,<strong>";
+      document.getElementById('loading2sub').innerHTML="<i>Não foi econtrado nenhum dado registado no dia " + dpTemp.value +".<i>";
+    });
  });
 
  $("#verDist").click(function() {
+   // Get the selected date
    dayX = dpDist.value.split(" ")[0];
    monthX = dpDist.value.split(" ")[1];
    yearX = dpDist.value.split(" ")[2];
 
+   // if hidden, unhide the loading proggress screen
    loading3.classList.remove("hidden");
-   document.getElementById('getpdf_dist').setAttribute("disabled", "");
    ctx_dist.classList.add("hidden");
+
+   // disable the get report butotn
+   document.getElementById('getpdf_dist').setAttribute("disabled", "");
+
+   // show the loading spinner
    document.getElementById('spinnerloading3').removeAttribute("hidden", "");
+   // set the loading text
    document.getElementById('loading3title').innerHTML="<strong>Procurando dados...<strong>";
    document.getElementById('loading3sub').innerHTML="<i>conectando com o servidor<i>";
 
-   ref.once("value").then(function(snapshot) {
+   // query the firebase
+   var promisedist_ = ref.once("value").then(function(snapshot) {
       snapshot.forEach(function(childSnapshot) {
+        // get the entire firebase database object
         var childData = childSnapshot.val();
-
+        // get the specific_date_object
         var specific_date_object = childData[yearX][monthX][dayX];
 
+        // check if there's any data of the selected date in firebase
         if (specific_date_object == null) {
+          // if no data of the selected date was found:
+          // hide the loading spinner
           document.getElementById('spinnerloading3').setAttribute("hidden", "");
+          // apologize
           document.getElementById('loading3title').innerHTML="<strong>Oops,<strong>";
           document.getElementById('loading3sub').innerHTML="<i>Não foi econtrado nenhum dado registado no dia " + dpDist.value +".<i>";
 
         } else {
-
+          // if there's data, enable the button to get general report
           document.getElementById('getpdf_dist').removeAttribute("disabled", "");
 
-          distance_array = [];
-          var distance_object = specific_date_object['Distance'];
+          distance_array = []; // empty the distance data array retrieved from firebase
+          var distance_object = specific_date_object['Distance']; // get the distance data object
+          // convert the object to an array
           distance_array = Object.keys(distance_object).map(function(key) {
             return [String(key), distance_object[key]];
           });
-          console.log(distance_array);
 
-          // itterate through distance_array
-          // first clear dist_time
-          dist_time = [];
-          dist_values = [];
 
+          dist_time = []; // clear already existing data
+          dist_values = []; // clear already existing data
           if(chartDist != null){
             chartDist.destroy();
           }
 
+          // get the time and value from the general distance data array
           for(var d in distance_array){
             dist_time.push(distance_array[d][0]); // use 0 to get time, use 1 to get value
             dist_values.push(distance_array[d][1]); // use 0 to get time, use 1 to get value
@@ -421,12 +447,19 @@ var vTemp = document.getElementById('verTemp');
               options: options
           });
 
-          loading3.classList.add("hidden");
-          ctx_dist.classList.remove("hidden");
+          // when data is done loading from server
+          loading3.classList.add("hidden"); // hide the loading
+          ctx_dist.classList.remove("hidden"); // unhide the graph
 
         }
       });
     });
+
+   promisedist_.catch(function(s){
+      document.getElementById('spinnerloading3').setAttribute("hidden", "");
+      document.getElementById('loading3title').innerHTML="<strong>Oops,<strong>";
+      document.getElementById('loading3sub').innerHTML="<i>Não foi econtrado nenhum dado registado no dia " + dpTemp.value +".<i>";
+   });
  });
 
 
