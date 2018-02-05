@@ -14,10 +14,9 @@
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="js-css/material-components-web/dist/material-components-web.css">
     <link rel="stylesheet" href="js-css/app.css">
-
   </head>
 
-  <body style="background-color: rgb(94,125,138)">
+  <body style="background-color: rgb(94, 125, 138)">
     <!-- Page -->
     <!-- Show this until page loads completely -->
 
@@ -46,6 +45,7 @@
       </header>
 
       <main class="mdl-layout__content" style="background-color: #f1f1f1">
+        <!-- Home Tab -->
         <section class="mdl-layout__tab-panel is-active" id="home_tab">
           <div class="page-content">
 
@@ -56,7 +56,6 @@
                   <div style="text-align: center">
                     <h4 style="margin-top: 0px; color: rgb(193, 73, 73); margin-bottom: 0px" ><strong>[Arduino Dashboard]</strong></h4>
                     <h6 style="margin-top: 0px; font-size: 14px"><strong>Entre na sua conta para continuar</strong></h6>
-
                   </div>
 
                   <!-- Simple Textfield -->
@@ -106,7 +105,7 @@
                         <button disabled style="background-color: #d7d4d4; border-radius: 5px;" id="verTemp" class="mdl-button mdl-js-button mdl-js-ripple-effect">
                           Ver
                         </button>
-                        <button disabled id="getpdf_temp" class="mdc-button mdc-button--raised">
+                        <button id="getpdf_temp" class="mdc-button mdc-button--raised">
                           <i class="material-icons mdc-button__icon">picture_as_pdf</i>
                           Relatório
                         </button>
@@ -215,6 +214,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.2/jspdf.plugin.autotable.js"></script>
     <script src="js-css/moment.min.js" charset="utf-8"></script>
     <script src="js-css/app.js" charset="utf-8"></script>
+    <script src="js-css/table.js" charset="utf-8"></script>
+
 
   </body>
 </html>

@@ -31,6 +31,7 @@ var loading1 = document.getElementById("loading1");
 var loading2 = document.getElementById("loading2");
 var loading3 = document.getElementById("loading3");
 
+var myEmail;
 
 var dist_time = [];
 var dist_values = [];
@@ -157,11 +158,11 @@ var vTemp = document.getElementById('verTemp');
  var dpDist = document.getElementById('datepickerDist');
  var dpTemp = document.getElementById('datepickerTemp');
  var dpHum = document.getElementById('datepickerHum');
- var isit = false;
 
  var dayX;
  var monthX;
  var yearX;
+ var dayd;
 
 
 
@@ -169,6 +170,7 @@ var vTemp = document.getElementById('verTemp');
    dayX = dpTemp.value.split(" ")[0];
    monthX = dpTemp.value.split(" ")[1];
    yearX = dpTemp.value.split(" ")[2];
+   dayd = dpTemp.value;
 
    loading1.classList.remove("hidden");
    ctx_temp.classList.add("hidden");
@@ -644,6 +646,8 @@ $( "#login" ).click(function() {
   //RealTime login/logout listener
   firebase.auth().onAuthStateChanged(function(firebaseUser){
      if(firebaseUser){
+
+       myEmail = firebaseUser.email;
        //If the user is logged in do this
        //Save a cookie
        document.cookie = "signedin=yes; expires=Thu, 18 Dec 2019 12:00:00 UTC; path=/";
