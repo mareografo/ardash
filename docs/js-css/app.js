@@ -7,7 +7,7 @@ document.onreadystatechange = function () {
 
       },1000);
   }
-};
+};1
 
 // Initialize Firebase
 var config = {
@@ -114,10 +114,11 @@ var vHum = document.getElementById('verHum');
 var vTemp = document.getElementById('verTemp');
 
  /////////////////////////////////////////////////////////
+ //date picker jquery_ui
  $(function(){
    $("#datepickerTemp").datepicker({
-     minDate: new Date(2018, 00, 01),
-     maxDate: new Date(2025, 12, 31),
+     minDate: new Date(2018, 01, 01),
+     maxDate: new Date(2018, 01, 31),
      dateFormat: "dd M yy",
      showAnim: "slideDown",
      onSelect: function (date){
@@ -127,8 +128,8 @@ var vTemp = document.getElementById('verTemp');
    });
 
    $("#datepickerHum").datepicker({
-     minDate: new Date(2018, 00, 01),
-     maxDate: new Date(2025, 12, 31),
+     minDate: new Date(2018, 01, 01),
+     maxDate: new Date(2018, 01, 31),
      dateFormat: "dd M yy",
      showAnim: "slideDown",
      onSelect: function (date){
@@ -138,8 +139,8 @@ var vTemp = document.getElementById('verTemp');
    });
 
    $("#datepickerDist").datepicker({
-     minDate: new Date(2018, 00, 01),
-     maxDate: new Date(2025, 12, 31),
+     minDate: new Date(2018, 01, 01),
+     maxDate: new Date(2018, 01, 31),
      dateFormat: "dd M yy",
      showAnim: "slideDown",
      onSelect: function (date){
@@ -357,6 +358,8 @@ var vTemp = document.getElementById('verTemp');
           document.getElementById('loading3title').innerHTML="<strong>Oops,<strong>";
           document.getElementById('loading3sub').innerHTML="<i>Não foi econtrado nenhum dado registado no dia " + dpDist.value +".<i>";
 
+        } else {
+
           document.getElementById('getpdf_dist').removeAttribute("disabled", "");
 
           distance_array = [];
@@ -420,7 +423,6 @@ var vTemp = document.getElementById('verTemp');
 
           loading3.classList.add("hidden");
           ctx_dist.classList.remove("hidden");
-        } else {
 
         }
       });
