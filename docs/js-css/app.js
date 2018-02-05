@@ -169,8 +169,8 @@ var vTemp = document.getElementById('verTemp');
    monthX = dpTemp.value.split(" ")[1];
    yearX = dpTemp.value.split(" ")[2];
 
-   loading1.classList.add("hidden");
-   ctx_temp.classList.remove("hidden");
+   loading1.classList.remove("hidden");
+   ctx_temp.classList.add("hidden");
    document.getElementById('getpdf_temp').setAttribute("disabled", "");
    document.getElementById('spinnerloading1').removeAttribute("hidden", "");
    document.getElementById('loading1title').innerHTML="<strong>Procurando dados...<strong>";
