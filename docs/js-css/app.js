@@ -118,7 +118,7 @@ var vTemp = document.getElementById('verTemp');
  $(function(){
    $("#datepickerTemp").datepicker({
      minDate: new Date(2018, 01, 01),
-     maxDate: new Date(2018, 01, 31),
+     maxDate: new Date(2018, 01, 28),
      dateFormat: "dd M yy",
      showAnim: "slideDown",
      onSelect: function (date){
@@ -129,7 +129,7 @@ var vTemp = document.getElementById('verTemp');
 
    $("#datepickerHum").datepicker({
      minDate: new Date(2018, 01, 01),
-     maxDate: new Date(2018, 01, 31),
+     maxDate: new Date(2018, 01, 28),
      dateFormat: "dd M yy",
      showAnim: "slideDown",
      onSelect: function (date){
@@ -140,7 +140,7 @@ var vTemp = document.getElementById('verTemp');
 
    $("#datepickerDist").datepicker({
      minDate: new Date(2018, 01, 01),
-     maxDate: new Date(2018, 01, 31),
+     maxDate: new Date(2018, 01, 28),
      dateFormat: "dd M yy",
      showAnim: "slideDown",
      onSelect: function (date){
