@@ -1,0 +1,6 @@
+{
+  "name": "Mareografo Server",
+  "description": "PHP Server to send sensor data to firebase.",
+  "repository": "https://github.com/kishannareshpal/ardash",
+  "addons": []
+}

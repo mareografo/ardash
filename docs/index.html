@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mareografo Dashboard</title>
+
+    <!-- md-bootstrap -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"> -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.5/css/mdb.min.css"> -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-red.min.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="material-components-web/dist/material-components-web.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"/>
+    <link rel="stylesheet" href="js-css/app.css">
+
+  </head>
+
+  <body style="background-color: rgb(94,125,138)">
+    <!-- Page -->
+    <!-- Show this until page loads completely -->
+
+    <!-- SHOW A COOL LOADING SCREEN WHILE THE CONTENT FINISHES TO LOAD -->
+    <div id="loading_" style="text-aling: center;" class="middler">
+      <h4 style="color: white"><i><strong>Arduino Dashboard</strong></i></h4>
+      <div style="width: 100%" id="p2" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+    </div>
+
+    <!-- Simple header with fixed tabs. -->
+    <div id="body_" hidden class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-tabs">
+      <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+          <!-- Title -->
+          <span class="mdl-layout-title"><strong>ArDash</strong></span>
+        </div>
+        <!-- Tabs -->
+        <div class="mdl-layout__tab-bar ">
+          <a href="#home_tab" id="hometab" class="mdl-layout__tab is-active"></a>
+          <a href="#temp_tab" id="temptab" class="mdl-layout__tab" hidden>Temperatura</a>
+          <a href="#hum_tab" id="humtab" class="mdl-layout__tab" hidden>Humidade</a>
+          <a href="#dist_tab" id="disttab" class="mdl-layout__tab" hidden>Distância</a>
+          <!-- <a href="#gps_tab" id="gpstab" class="mdl-layout__tab" hidden>GPS</a> -->
+        </div>
+      </header>
+
+      <main class="mdl-layout__content" style="background-color: #f1f1f1">
+        <section class="mdl-layout__tab-panel is-active" id="home_tab">
+          <div class="page-content">
+
+            <div class="mdl-grid">
+              <div class="mdl-layout-spacer"></div>
+
+                <div style="margin-top: 10%" id="loginform">
+                  <div style="text-align: center">
+                    <h4 style="margin-top: 0px; color: rgb(193, 73, 73); margin-bottom: 0px" ><strong>[Arduino Dashboard]</strong></h4>
+                    <h6 style="margin-top: 0px; font-size: 14px"><strong>Entre na sua conta para continuar</strong></h6>
+
+                  </div>
+
+                  <!-- Simple Textfield -->
+                    <div class="mdl-textfield mdl-js-textfield" style="margin-bottom: 0px">
+                      <input class="mdl-textfield__input" type="text" id="emailInput">
+                      <label class="mdl-textfield__label" for="emailInput">seu email</label>
+                    </div>
+                    <br>
+                    <div class="mdl-textfield mdl-js-textfield" style="margin-top: 0px">
+                      <input class="mdl-textfield__input" type="password" id="passInput">
+                      <label class="mdl-textfield__label" for="passInput">sua senha</label>
+                    </div>
+
+                    <div style="text-align: right">
+                      <button class="mdl-button mdl-js-button mdl-js-ripple-effect login" id="login" style="background-color: #e0e0e0; color: red">
+                        Login
+                      </button>
+                    </div>
+                </div>
+
+                <div style="margin-top: 15%" id="hellothere" hidden>
+                  <h3 id="greetings" style="margin-bottom: 0px; color: rgb(193, 73, 73)"><strong><i></i></strong></h3>
+                  <h5 style="margin-top: 0px; margin-bottom: 0px" ><strong>Selecione um sensor acima.</strong></h5>
+                  <div style="text-align: end">
+                    <button class="mdl-button mdl-js-button logout" id="logout" style="background-color: #969696; color: white; font-size: 14px">logout?</button>
+                  </div>
+                </div>
+              <div class="mdl-layout-spacer"></div>
+
+            </div>
+
+
+          </div>
+        </section>
+
+        <!-- Grafico Temperature -->
+        <section class="mdl-layout__tab-panel" id="temp_tab">
+            <div class="page-content">
+              <div style="width: 100%;">
+                <div style="background-color: #dfdfdf; text-align: center; margin-top: 2px; margin-bottom: 0px">
+                  <p style="color: grey">Data:
+                    <span>
+                      <span class="mdl-textfield mdl-js-textfield" style="width: 90px; margin-bottom: 0px">
+                        <input class="mdl-textfield__input" type="text" id="datepickerTemp">
+                      </span>
+                      <span>
+                        <button disabled style="background-color: #d7d4d4; border-radius: 5px;" id="verTemp" class="mdl-button mdl-js-button mdl-js-ripple-effect">
+                          Ver
+                        </button>
+                        <button disabled id="getpdf_temp" class="mdc-button mdc-button--raised">
+                          <i class="material-icons mdc-button__icon">picture_as_pdf</i>
+                          Relatório
+                        </button>
+                      </span>
+                    </span>
+                  </p>
+                </div>
+
+                <canvas class="hidden" id="temp"></canvas>
+
+                <div id="loading1" style="text-align: center; margin-top: 200px; color: black" class="hidden">
+                  <div id="spinnerloading1" hidden class="mdl-spinner mdl-js-spinner is-active"></div>
+                  <h4 id="loading1title" style="margin-bottom: 0px"><strong>Sensor de Temperatura</strong></h4>
+                  <p id="loading1sub"><i>escolha uma data acima.</i></p>
+                </div>
+
+              </div>
+            </div>
+        </section>
+
+        <!-- Grafico Humidade -->
+        <section class="mdl-layout__tab-panel" id="hum_tab">
+          <div class="page-content">
+              <div style="width: 100%">
+                <div style="background-color: #dfdfdf; text-align: center; margin-top: 2px; margin-bottom: 0px">
+                  <p style="color: grey">Data:
+                    <span>
+                      <span class="mdl-textfield mdl-js-textfield" style="width: 90px; margin-bottom: 0px">
+                        <input class="mdl-textfield__input" type="text" id="datepickerHum">
+                      </span>
+                      <span>
+                        <button disabled style="background-color: #d7d4d4; border-radius: 5px;" id="verHum" class="mdl-button mdl-js-button mdl-js-ripple-effect">
+                          Ver
+                        </button>
+                        <button disabled id="getpdf_hum" class="mdc-button mdc-button--raised">
+                          <i class="material-icons mdc-button__icon">picture_as_pdf</i>
+                          Relatório
+                        </button>
+                      </span>
+                    </span>
+                  </p>
+                </div>
+
+                <canvas style="color: white" class="hidden" id="hum"></canvas>
+
+                <div id="loading2" style="text-align: center; margin-top: 200px; color: black" class="hidden">
+                  <div id="spinnerloading2" hidden class="mdl-spinner mdl-js-spinner is-active"></div>
+                  <h4 id="loading2title" style="margin-bottom: 0px"><strong>Sensor de Humidade</strong></h4>
+                  <p id="loading2sub"><i>escolha uma data acima.</i></p>
+                </div>
+              </div>
+          </div>
+        </section>
+
+        <!-- Grafico Distancia -->
+        <section class="mdl-layout__tab-panel" id="dist_tab">
+          <div class="page-content">
+              <div style="width: 100%;">
+                <div style="background-color: #dfdfdf; text-align: center; margin-top: 2px; margin-bottom: 0px">
+                  <p style="color: grey">Data:
+                    <span>
+                      <span class="mdl-textfield mdl-js-textfield" style="width: 90px; margin-bottom: 0px">
+                        <input class="mdl-textfield__input" type="text" id="datepickerDist">
+                      </span>
+                      <span>
+                        <button disabled style="background-color: #d7d4d4; border-radius: 5px;" id="verDist" class="mdl-button mdl-js-button mdl-js-ripple-effect">
+                          Ver
+                        </button>
+                        <button disabled id="getpdf_dist" class="mdc-button mdc-button--raised">
+                          <i class="material-icons mdc-button__icon">picture_as_pdf</i>
+                          Relatório
+                        </button>
+                      </span>
+                    </span>
+                  </p>
+                </div>
+
+                <canvas class="hidden" id="dist"></canvas>
+
+                <div id="loading3" style="text-align: center; margin-top: 200px; color: black" class="hidden">
+                  <div id="spinnerloading3" hidden class="mdl-spinner mdl-js-spinner is-active"></div>
+                  <h4 id="loading3title" style="margin-bottom: 0px"><strong>Sensor de Distância</strong></h4>
+                  <p id="loading3sub"><i>escolha uma data acima.</i></p>
+                </div>
+
+              </div>
+          </div>
+        </section>
+
+        </main>
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script> -->
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.4/js.cookie.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="material-components-web/dist/material-components-web.min.js"></script>
+    <script>mdc.autoInit()</script>
+    <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.2/jspdf.plugin.autotable.js"></script>
+    <script src="js-css/moment.min.js" charset="utf-8"></script>
+    <script src="js-css/app.js" charset="utf-8"></script>
+    <script src="js-css/map.js" charset="utf-8"></script>
+
+  </body>
+</html>
