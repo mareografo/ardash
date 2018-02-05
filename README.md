@@ -1,6 +1,6 @@
 # Arduino Dashboard and Server
 
-> Dashboard Version: **1.1**<br>
+> Dashboard Version: **1.1.2**<br>
 > Server version: **1_beta2**
 
 ## 1. Dashboard
