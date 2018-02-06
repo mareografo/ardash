@@ -1,5 +1,19 @@
 
-$("#getpdf_temp").click(function(e){
+const MDCDialog = mdc.dialog.MDCDialog;
+const MDCDialogFoundation = mdc.dialog.MDCDialogFoundation;
+const util = mdc.dialog.util;
+
+var tempdialog_ = new mdc.dialog.MDCDialog.attachTo(document.querySelector('#tempdialog_'));
+var humdialog_ = new mdc.dialog.MDCDialog.attachTo(document.querySelector('#humdialog_'));
+var distdialog_ = new mdc.dialog.MDCDialog.attachTo(document.querySelector('#distdialog_'));
+
+$("#getpdf_temp").click(function(){
+  document.getElementById('my-mdc-dialog-description_temp').innerHTML = "Baixar relatório do dia <strong>" + dpTemp.value + "</strong>?"
+  tempdialog_.show();
+  tempdialog_.listen('MDCDialog:cancel', function() {
+  })
+});
+$("#getTemp_").click(function(){
   var columns = ["Hora", "Valor (ºC)"];
   var rows = temp_array;
 
@@ -8,7 +22,6 @@ $("#getpdf_temp").click(function(e){
     orientation: 'portrait',
     unit: 'cm',
   });
-
 
   doc.autoTable(columns, rows, {
     //options
@@ -32,7 +45,17 @@ $("#getpdf_temp").click(function(e){
 });
 
 
+
 $("#getpdf_hum").click(function(e){
+  document.getElementById('my-mdc-dialog-description_hum').innerHTML = "Baixar relatório do dia <strong>" + dpHum.value + "</strong>?"
+  humdialog_.show();
+  humdialog_.listen('MDCDialog:cancel', function() {
+  });
+
+
+
+});
+$("#getHum_").click(function(){
   var columns = ["Hora", "Valor (%)"];
   var rows = hum_array;
 
@@ -62,10 +85,19 @@ $("#getpdf_hum").click(function(e){
   doc.text("Imprimido por: " + myEmail, 2, 3.8);
 
   doc.save("Relatorio de Humidade (" + dpHum.value + ").pdf");
-
 });
 
+
+
 $("#getpdf_dist").click(function(){
+
+  document.getElementById('my-mdc-dialog-description_dist').innerHTML = "Baixar relatório do dia <strong>" + dpDist.value + "</strong>?"
+  distdialog_.show();
+
+  distdialog_.listen('MDCDialog:cancel', function() {
+  });
+});
+$("#getDist_").click(function(){
   var columns = ["Hora", "Valor (cm)"];
   var rows = distance_array;
 
@@ -95,5 +127,4 @@ $("#getpdf_dist").click(function(){
   doc.text("Imprimido por: " + myEmail, 2, 3.8);
 
   doc.save("Relatorio de Humidade (" + dpDist.value + ").pdf");
-
 });

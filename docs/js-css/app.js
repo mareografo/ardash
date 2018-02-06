@@ -102,6 +102,7 @@ if(Cookies.get('signedin') == "yes"){
   // Warn the user that he's authenticated by
  loginform.classList.add('hidden');
  hellothere.removeAttribute("hidden", "");
+ document.getElementById('logout').removeAttribute("hidden", "");
 
  hometab.innerHTML="Home";
  humtab.removeAttribute("hidden", "");
